@@ -1,0 +1,4 @@
+*.out
+*.pch
+*.dSYM
+main
