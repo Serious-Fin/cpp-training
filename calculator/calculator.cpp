@@ -26,16 +26,111 @@ bool isSeparator(char character);
 std::vector<Token> ConvertToRPN(std::vector<Token> tokens);
 bool isOperator(int type);
 int getOperatorPriority(int type);
+std::vector<Token> ReverseVector(std::vector<Token> list);
+double EvaluateRPN(std::vector<Token> tokens);
+double performOperation(int type, double left, double right);
+void PrintChars(std::vector<Token> tokens, std::string label);
 
 double Calculator::calculate(const std::string &expression)
 {
     std::vector<Token> test = TokenizeExpression(expression);
+    PrintChars(test, "test set");
     std::vector<Token> rpn = ConvertToRPN(test);
-    for (auto &node : rpn)
+    PrintChars(rpn, "rpn set");
+
+    std::vector<Token> reverse = ReverseVector(rpn);
+    return EvaluateRPN(rpn);
+}
+
+void PrintChars(std::vector<Token> tokens, std::string label)
+{
+    std::cout << label << "\n";
+    for (auto &t : tokens)
     {
-        std::cout << node.symbol << " ";
+        std::cout << t.symbol << " ";
     }
-    return 43;
+    std::cout << "\n";
+}
+
+// ----- Calculate RPN -----
+double EvaluateRPN(std::vector<Token> tokens)
+{
+    std::vector<double> result;
+    for (auto &token : tokens)
+    {
+        if (token.type == NUMBER)
+        {
+            double number = std::stod(token.symbol, nullptr);
+            result.push_back(number);
+        }
+
+        if (isOperator(token.type))
+        {
+            // pop two operators and perform the thing
+            double right = result.back();
+            result.pop_back();
+            double left = result.back();
+            result.pop_back();
+
+            double res = performOperation(token.type, left, right);
+            result.push_back(res);
+        }
+    }
+    return result.back();
+}
+
+double performOperation(int type, double left, double right)
+{
+    switch (type)
+    {
+    case PLUS:
+        std::cout << left << " + " << right << "\n";
+        return left + right;
+
+    case MINUS:
+        std::cout << left << " - " << right << "\n";
+        return left - right;
+
+    case MULTIPLY:
+        std::cout << left << " * " << right << "\n";
+        return left * right;
+
+    case DIVIDE:
+        std::cout << left << " / " << right << "\n";
+        return left / right;
+
+    default:
+        // TODO: throw error
+        return 0;
+    }
+}
+
+// reverse RPN for faster operations as a stack
+std::vector<Token> ReverseVector(std::vector<Token> list)
+{
+    int start = 0;
+    int end = list.size() - 1;
+    while (start < end)
+    {
+        Token tempToken = list[start];
+        list[start] = list[end];
+        list[end] = tempToken;
+
+        start++;
+        end--;
+    }
+    return list;
+}
+
+double CalculateRPN(std::vector<Token> rpn)
+{
+    while (rpn.size() > 1)
+    {
+        // get left operand
+        Token left = rpn.front();
+        Token right = rpn.at(1);
+    }
+    return 0;
 }
 
 // ----- Converter to Reverse Polish Notation -----
@@ -79,11 +174,13 @@ std::vector<Token> ConvertToRPN(std::vector<Token> tokens)
         }
     }
 
-    for (auto &oper : operatorStack)
+    while (operatorStack.size() > 0)
     {
+        Token oper = operatorStack.back();
+        operatorStack.pop_back();
         if (oper.type != L_PAREN || oper.type != R_PAREN)
         {
-            output.push_back(operatorStack.back());
+            output.push_back(oper);
         }
     }
     return output;
@@ -123,7 +220,6 @@ std::vector<Token> TokenizeExpression(const std::string &expression)
     while (currIndex < expression.length())
     {
         char character = expression[currIndex];
-        std::cout << "search " << character << "\n";
         switch (character)
         {
         case '+':
@@ -180,6 +276,7 @@ std::vector<Token> TokenizeExpression(const std::string &expression)
         }
         currIndex++;
     }
+    std::cout << "\n";
     return tokens;
 }
 
