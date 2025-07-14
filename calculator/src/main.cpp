@@ -9,5 +9,4 @@ int main()
 
 // TODO:
 // Add tests
-// Move out tokenizer, evaluater and calculator to separate projects as in best practices
 // add proper error handling
