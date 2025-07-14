@@ -50,6 +50,9 @@ std::vector<Token> TokenizeExpression(const std::string &expression)
                 .type = R_PAREN});
             break;
 
+        case ' ':
+            break;
+
         default:
             int start, end;
             start = end = currIndex;
@@ -63,6 +66,11 @@ std::vector<Token> TokenizeExpression(const std::string &expression)
                     .symbol = expression.substr(start, (end - start)),
                     .type = NUMBER});
                 currIndex += (end - start - 1);
+            }
+            else
+            {
+                std::string errorMessage = std::string("unknown character encountered \"") + character + "\"";
+                throw std::invalid_argument(errorMessage);
             }
             break;
         }

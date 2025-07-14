@@ -8,5 +8,6 @@ int main()
 }
 
 // TODO:
-// Add tests
-// add proper error handling
+// Add tests DOING
+// add proper error handling DOING
+// add CLI for main()

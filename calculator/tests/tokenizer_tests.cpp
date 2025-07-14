@@ -127,4 +127,10 @@ TEST_CASE("Expression is tokenized", "[TokenizeExpression]")
         std::vector<Token> got = TokenizeExpression(expression);
         REQUIRE(want == got);
     }
+
+    SECTION("Encountering an unknown symbol should throw")
+    {
+        std::string expression = " 22 ? 4";
+        REQUIRE_THROWS_AS(TokenizeExpression(expression), std::invalid_argument);
+    }
 }
