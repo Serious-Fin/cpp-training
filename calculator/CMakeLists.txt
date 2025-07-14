@@ -4,9 +4,11 @@ project(CalculatorApp LANGUAGES CXX)
 
 set(SOURCE_FILES
     src/main.cpp
+    src/calculator/calculator.cpp
     src/tokenizer/tokenizer.cpp
     src/rpn_converter/rpn_converter.cpp
     src/evaluator/evaluator.cpp
+    src/common/types.cpp
 )
 
 add_executable(CalculatorApp ${SOURCE_FILES})
