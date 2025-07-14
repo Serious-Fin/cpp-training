@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-#include "calculator.h"
+#include "calculator/calculator.h"
 
 int main()
 {
-    std::string a = "aaa";
     std::cout << Calculator::calculate("5 * 5 + 100 / 7.5 * 8") << "\n";
 }
 
