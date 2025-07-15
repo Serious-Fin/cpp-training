@@ -46,7 +46,6 @@ double performOperation(int type, double left, double right)
         return left / right;
 
     default:
-        // TODO: throw error
-        return 0;
+        throw std::invalid_argument("unknown operation type");
     }
 }
