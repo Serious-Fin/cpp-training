@@ -27,6 +27,7 @@ add_subdirectory(libs/Catch2)
 
 add_executable(CalculatorTests 
     tests/tokenizer_tests.cpp
+    tests/rpn_evaluator_tests.cpp
     ${APP_SOURCE_FILES}
 )
 

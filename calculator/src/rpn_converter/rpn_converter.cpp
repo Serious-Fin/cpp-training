@@ -35,8 +35,16 @@ std::vector<Token> ConvertToRPN(std::vector<Token> tokens)
 
         if (token.type == R_PAREN)
         {
-            while (operatorStack.size() > 0 && operatorStack.back().type != L_PAREN)
+            while (true)
             {
+                if (operatorStack.size() == 0)
+                {
+                    throw std::invalid_argument("Mismatched parenthesis in the expression");
+                }
+                if (operatorStack.back().type == L_PAREN)
+                {
+                    break;
+                }
                 Token poppedOperator = operatorStack.back();
                 operatorStack.pop_back();
                 output.push_back(poppedOperator);
@@ -49,10 +57,11 @@ std::vector<Token> ConvertToRPN(std::vector<Token> tokens)
     {
         Token oper = operatorStack.back();
         operatorStack.pop_back();
-        if (oper.type != L_PAREN || oper.type != R_PAREN)
+        if (oper.type == L_PAREN)
         {
-            output.push_back(oper);
+            throw std::invalid_argument("Mismatched parenthesis in the expression");
         }
+        output.push_back(oper);
     }
     return output;
 }
@@ -74,6 +83,6 @@ int getOperatorPriority(int type)
         return 3;
 
     default:
-        return -1;
+        throw std::invalid_argument("Unknown operator");
     }
 }
