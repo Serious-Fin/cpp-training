@@ -2,11 +2,17 @@
 #include <string>
 #include "calculator/calculator.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << Calculator::calculate("5 * 5 + 100 / 7.5 * 8") << "\n";
+    if (argc != 2)
+    {
+        std::cout << "Usage: ./calculator \"<expression>\"\n";
+        std::cout << "Example: ./calculator \"(15 / 3) - 2\"\n";
+        return 1;
+    }
+    std::cout << "Result: " << Calculator::calculate(std::string(argv[1])) << "\n";
+    return 0;
 }
 
 // TODO:
-// add CLI for main()
 // make readme with setup instructions (download catch2 but it's not needed for users idk) and usage instructions

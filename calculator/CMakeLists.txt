@@ -12,12 +12,12 @@ set(APP_SOURCE_FILES
     src/common/types.cpp
 )
 
-add_executable(CalculatorApp 
+add_executable(calculator 
     src/main.cpp
     ${APP_SOURCE_FILES}
 )
 
-target_include_directories(CalculatorApp PRIVATE
+target_include_directories(calculator PRIVATE
     "${CMAKE_SOURCE_DIR}/src"
 )
 
