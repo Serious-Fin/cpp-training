@@ -13,6 +13,3 @@ int main(int argc, char *argv[])
     std::cout << "Result: " << Calculator::calculate(std::string(argv[1])) << "\n";
     return 0;
 }
-
-// TODO:
-// make readme with setup instructions (download catch2 but it's not needed for users idk) and usage instructions
