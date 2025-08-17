@@ -12,16 +12,16 @@ Supported functionality:
 
 ## Install, Build & Run
 
-Open a terminal window and clone parent repository
+Open a terminal window and clone parent (`cpp-training`) repository
 
 ```text
 https://github.com/Serious-Fin/cpp-training.git
 ```
 
-Step into the cloned directory
+Step into the calculator subdirectory directory
 
 ```text
-cd calculator
+cd cpp-training/calculator/
 ```
 
 Make a new directory `libs` and step into it
@@ -57,7 +57,7 @@ Build the project
 cmake --build .
 ```
 
-Now you can calculate expressions
+Now you can calculate expressions by running the binary
 
 ```text
 ./calculator "2 + 5 * 4"
@@ -65,6 +65,6 @@ Now you can calculate expressions
 
 ## Running Tests
 
-Tests are stored in `./tests` directory. They are compiled and build with the CMake tool as well. To run the tests, build the project as instructed above. Running tests can be performed with `./CalculatorTests` command.
+Tests are stored in `./tests` directory. They are compiled and built with the CMake tool as well. To run the tests, build the project as instructed above. After that running tests can be performed with `./CalculatorTests` command.
 
 ![Example of tests being run inside terminal](./demo/running-tests.png)
